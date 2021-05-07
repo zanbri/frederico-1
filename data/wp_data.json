@@ -1,0 +1,287 @@
+{
+  "projects": [
+    {
+      "id": 48,
+      "date": "2021-05-02T11:11:36",
+      "date_gmt": "2021-05-02T11:11:36",
+      "guid": { "rendered": "https://frederico.funfuns.studio/?p=48" },
+      "modified": "2021-05-02T11:11:37",
+      "modified_gmt": "2021-05-02T11:11:37",
+      "slug": "impossible-objects",
+      "status": "publish",
+      "type": "post",
+      "link": "https://frederico.funfuns.studio/impossible-objects/",
+      "title": { "rendered": "IMPOSSIBLE OBJECTS" },
+      "content": { "rendered": "", "protected": false },
+      "excerpt": { "rendered": "", "protected": false },
+      "author": 1,
+      "featured_media": 0,
+      "comment_status": "open",
+      "ping_status": "open",
+      "sticky": false,
+      "template": "",
+      "format": "standard",
+      "meta": [],
+      "categories": [1],
+      "acf": {
+        "year": "2020",
+        "place": "",
+        "content": [
+          {
+            "lang": "En",
+            "text": "<p>An Ames room is a distorted room that creates an optical illusion. Probably influenced by the writings of Hermann Helmholtz, it was invented by the American scientist Adelbert Ames, Jr. in 1946 and built the following year. According to the theory of visual perception known as Young\u2013Helmholtz theory, I am currently working on impossible structures, inspired among other things, by the work of Hitoshi Ikeuchi and Kokichi Sugihara.</p>\n"
+          }
+        ],
+        "information": false,
+        "project_color": "#42FF00",
+        "images": [
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_chair-and-penrose.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_io-exercise.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          }
+        ]
+      },
+      "_links": {
+        "self": [
+          { "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/48" }
+        ],
+        "collection": [
+          { "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts" }
+        ],
+        "about": [
+          {
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/types/post"
+          }
+        ],
+        "author": [
+          {
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/users/1"
+          }
+        ],
+        "replies": [
+          {
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/comments?post=48"
+          }
+        ],
+        "version-history": [
+          {
+            "count": 2,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/48/revisions"
+          }
+        ],
+        "predecessor-version": [
+          {
+            "id": 52,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/48/revisions/52"
+          }
+        ],
+        "wp:attachment": [
+          {
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/media?parent=48"
+          }
+        ],
+        "wp:term": [
+          {
+            "taxonomy": "category",
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/categories?post=48"
+          }
+        ],
+        "curies": [
+          { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "date": "2021-05-02T11:07:27",
+      "date_gmt": "2021-05-02T11:07:27",
+      "guid": { "rendered": "https://frederico.funfuns.studio/?p=22" },
+      "modified": "2021-05-02T11:10:23",
+      "modified_gmt": "2021-05-02T11:10:23",
+      "slug": "hybrida",
+      "status": "publish",
+      "type": "post",
+      "link": "https://frederico.funfuns.studio/hybrida/",
+      "title": { "rendered": "HYBRIDA" },
+      "content": { "rendered": "", "protected": false },
+      "excerpt": { "rendered": "", "protected": false },
+      "author": 1,
+      "featured_media": 0,
+      "comment_status": "open",
+      "ping_status": "open",
+      "sticky": false,
+      "template": "",
+      "format": "standard",
+      "meta": [],
+      "categories": [1],
+      "acf": {
+        "year": "2019",
+        "content": [
+          {
+            "lang": "En",
+            "text": "<p>In the series entitled &#8220;Hybrida&#8221;, I create assemblies that are inspired by a contemporary visual language, significantly recalling the considerable quantity of objects intended for bulky items. By reinterpreting the function of the object and its subtle instillation in a whole, I imagine chimerical sculptures by creating a tension between true / false, artisan / industrial, real / uchronic anthropology. My approach oscillates between photography and cinema by proposing new narrations from scenographic spaces that I conceptualize. I create a tension between classic and modern, an encounter between the constant and the fugitive. Here I design costumes in collaboration with the models &#8211; a subtle critique of our consumer society. I have the desire to create a singular, innovative work, by reinventing silhouettes, improbable accumulations, in a craft atmosphere, bringing together obsolete pieces.<br />\n&#8220;Hybrida&#8221; wishes to reinvent the way we look at masks, ornaments, clothing, pieces of creations, accessories or any other object of social conventions.<br />\nThis work is situated at the confluence of the narration, the symbolic value and the material of the objects.</p>\n"
+          },
+          {
+            "lang": "FR",
+            "text": "<p>Dans la se\u0301rie intitule\u0301e \u00abHybrida\u00bb, je re\u0301alise des assemblages qui s\u2019inspirent d\u2019un langage visuel contemporain, rappelant de manie\u0300re significative la quantite\u0301 conside\u0301rable d\u2019objets a\u0300 destinations des encombrants. Par la re\u0301interpre\u0301tation de la fonction de l\u2019objet et son instillation subtile dans un ensemble, j\u2019imagine des sculptures chime\u0301riques en cre\u0301ant une tension entre vrai/faux, artisanal/industriel, anthropologie re\u0301elle/uchronique. Ma de\u0301marche oscille entre photographie et cine\u0301ma en proposant de nouvelles narrations a\u0300 partir d\u2019espaces sce\u0301nographiques que je conceptualise. Je cre\u0301e une tension entre classique et moderne, une rencontre entre le constant et le fugitif. Je conc\u0327ois ici des costumes en collaboration avec les mode\u0300les &#8211; une critique subtile de notre socie\u0301te\u0301 de consommation. J\u2019ai le de\u0301sir de re\u0301aliser une \u0153uvre singulie\u0300re, novatrice, en re\u0301inventant des silhouettes, des accumulations improbables, dans une atmosphe\u0300re artisanale, re\u0301unissant des pie\u0300ces obsole\u0300tes.<br />\n\u00ab Hybrida \u00bb souhaite re\u0301inventer le regard porte\u0301 aux masques, parures, ve\u0302tements, pie\u0300ces de cre\u0301ations, accessoires ou tout autre objet de conventions sociales.<br />\nCe travail se situe au confluent de la narration, de la valeur symbolique et de la matie\u0300re des objets.</p>\n"
+          }
+        ],
+        "project_color": "#42FF00",
+        "images": [
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_01.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_02.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_03.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_04.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_05.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_06.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_07.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_08.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_09.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_10.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_11.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_12.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_13.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_14.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_15.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          },
+          {
+            "image": "https://frederico.funfuns.studio/wp-content/uploads/2021/05/frederico_ramos_lopes_hybrida_16.jpg",
+            "caption": "",
+            "display_at_homepage": true
+          }
+        ],
+        "place": "Genova",
+        "information": [
+          {
+            "info_title": "Modelxs",
+            "info_content": "Pauline Ammann, Damien Lopez, Aur\u00e9lien Reymond, Davide Sanvee, Jony Valado, Alix Vermeulen"
+          },
+          {
+            "info_title": "Assistants",
+            "info_content": "Emilie D\u00e9rian, Doria Gomez Rosay"
+          }
+        ]
+      },
+      "_links": {
+        "self": [
+          { "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/22" }
+        ],
+        "collection": [
+          { "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts" }
+        ],
+        "about": [
+          {
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/types/post"
+          }
+        ],
+        "author": [
+          {
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/users/1"
+          }
+        ],
+        "replies": [
+          {
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/comments?post=22"
+          }
+        ],
+        "version-history": [
+          {
+            "count": 5,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/22/revisions"
+          }
+        ],
+        "predecessor-version": [
+          {
+            "id": 47,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/posts/22/revisions/47"
+          }
+        ],
+        "wp:attachment": [
+          {
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/media?parent=22"
+          }
+        ],
+        "wp:term": [
+          {
+            "taxonomy": "category",
+            "embeddable": true,
+            "href": "https://frederico.funfuns.studio/wp-json/wp/v2/categories?post=22"
+          }
+        ],
+        "curies": [
+          { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+        ]
+      }
+    }
+  ]
+}
