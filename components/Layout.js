@@ -1,7 +1,7 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
-import Header from "./Header";
 import ProjList from "./ProjList";
 
 import useFetch from "../hooks/useFetch";
@@ -20,7 +20,6 @@ function useDidUpdate(callback, deps) {
 
 export default function Layout({ children }) {
   const [projs, setProjs] = useState(null);
-  const [activeProj, setActiveProj] = useState(null);
   const [sortToggle, setSortToggle] = useState(false);
 
   // Sort
@@ -41,7 +40,6 @@ export default function Layout({ children }) {
   };
 
   const { data: rawProjects, error } = useFetch(
-    // "http://localhost:8000/projects"
     "https://frederico.funfuns.studio/wp-json/wp/v2/posts"
   );
 
@@ -52,12 +50,29 @@ export default function Layout({ children }) {
   return (
     <>
       <div>
+        {/* Window Header */}
         <Head>
           <title>Frederico Ramos Lopes</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Header />
+
+        {/* Header */}
+        <div>
+          <Link href="/">
+            <h1>Frederico Ramos Lopes</h1>
+          </Link>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+            labore consequuntur mollitia aspernatur pariatur, quidem ducimus
+            blanditiis velit quod quis, doloremque ipsa, enim impedit provident
+            nostrum ab ad adipisci natus.
+          </p>
+        </div>
+
+        {/* Errors */}
         {error && <div>{error}</div>}
+
+        {/* Projects */}
         {projs && <ProjList projs={projs} sorter={sortData} />}
       </div>
       {children}
