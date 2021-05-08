@@ -66,13 +66,13 @@ export default function Popover({ proj }) {
   return (
     <>
       {/* Header */}
-      <div>
-        <p>{proj.title.rendered}</p>
-        <p>{proj.acf.year}</p>
+      <div className="header">
+        <p className="title">{proj.title.rendered}</p>
+        <p className="year">{proj.acf.year}</p>
       </div>
 
       {/* Images */}
-      <div>
+      <div className="images">
         {proj.acf.images.map((ii) => (
           <Fragment key={ii.image}>
             <Image
@@ -88,14 +88,18 @@ export default function Popover({ proj }) {
       </div>
 
       {/* Description */}
-      <div>
+      <div className="desc">
         {proj.acf.content &&
           proj.acf.content.map((d) => (
-            <button key={d.lang} onClick={() => selectLang(d.lang)}>
+            <button
+              className="desc-lang"
+              key={d.lang}
+              onClick={() => selectLang(d.lang)}
+            >
               {d.lang}
             </button>
           ))}
-        <div>
+        <div className="desc-text">
           {ReactHtmlParser(
             proj.acf.content.filter((ob) => ob.lang === bestLangAvailable())[0]
               .text

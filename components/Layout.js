@@ -1,22 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import ProjList from "./ProjList";
 
 import useFetch from "../hooks/useFetch";
-
-function useDidUpdate(callback, deps) {
-  const hasMount = useRef(false);
-
-  useEffect(() => {
-    if (hasMount.current) {
-      callback();
-    } else {
-      hasMount.current = true;
-    }
-  }, deps);
-}
 
 export default function Layout({ children }) {
   const [projs, setProjs] = useState(null);
@@ -49,7 +37,7 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <div>
+      <div className="layout">
         {/* Window Header */}
         <Head>
           <title>Frederico Ramos Lopes</title>
@@ -57,20 +45,20 @@ export default function Layout({ children }) {
         </Head>
 
         {/* Header */}
-        <div>
+        <div className="header">
           <Link href="/">
-            <h1>Frederico Ramos Lopes</h1>
+            <h1 className="title">Frederico Ramos Lopes</h1>
           </Link>
-          <p>
+          <div className="blurb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
             labore consequuntur mollitia aspernatur pariatur, quidem ducimus
             blanditiis velit quod quis, doloremque ipsa, enim impedit provident
             nostrum ab ad adipisci natus.
-          </p>
+          </div>
         </div>
 
         {/* Errors */}
-        {error && <div>{error}</div>}
+        {error && <div className="error">{error}</div>}
 
         {/* Projects */}
         {projs && <ProjList projs={projs} sorter={sortData} />}
