@@ -18,7 +18,6 @@ export default function ProjList({ projs, sorter }) {
       </div>
       {projs.map((proj) => {
         return (
-          // TODO HERE I need to replace Link with a button that then updates the Context API obj by adding the proj id (or slug), then I also need to change the [slug].js to be empty (i think), and move the popover info to a new component, and in the layout, i loop through all projects, and see which proj popovers should be shown (by using the state in the context api). This way, I should be able to see multiple slugs at once (ugh..).
           <Link className="proj" href={`/project/${proj.slug}`} key={proj.id}>
             <a>
               <div className="proj-box">

@@ -1,7 +1,6 @@
-import { useState, useEffect, Fragment } from "react";
-import Image from "next/image";
+import { useEffect } from "react";
 
-import ReactHtmlParser from "react-html-parser";
+import { useDispatchAppState } from "../../components/AppContext";
 
 export const getStaticPaths = async () => {
   //   const res = await fetch("http://localhost:8000/projects");
@@ -39,73 +38,18 @@ export const getStaticProps = async (context) => {
 };
 
 export default function Popover({ proj }) {
-  const [selectedLang, setSelectedLang] = useState(null);
+  const dispatch = useDispatchAppState();
 
-  const bestLangAvailable = () => {
-    const eng = "En";
-    if (proj.acf.content.some((ob) => ob.lang === selectedLang)) {
-      // Check if selected lang is available
-      return selectedLang;
-    } else if (proj.acf.content.some((ob) => ob.lang === eng)) {
-      // Check if english is available
-      return eng;
-    }
-    // Otherwise, just use first language in data
-    console.log(proj.desc[0].lang);
-    return proj.desc[0].lang;
+  const handleProjOpen = (proj_id) => {
+    dispatch({
+      type: "OPEN_PROJ",
+      payload: proj_id,
+    });
   };
 
   useEffect(() => {
-    setSelectedLang(bestLangAvailable());
-  }, []);
+    handleProjOpen(proj.id);
+  }, [proj]);
 
-  const selectLang = (lang) => {
-    setSelectedLang(lang);
-  };
-
-  return (
-    <>
-      {/* Header */}
-      <div className="header">
-        <p className="title">{proj.title.rendered}</p>
-        <p className="year">{proj.acf.year}</p>
-      </div>
-
-      {/* Images */}
-      <div className="images">
-        {proj.acf.images.map((ii) => (
-          <Fragment key={ii.image}>
-            <Image
-              src="/favicon.ico"
-              // src={ii.image}
-              width={32}
-              height={32}
-              key={ii.image}
-            />
-            Caption: {ii.caption}
-          </Fragment>
-        ))}
-      </div>
-
-      {/* Description */}
-      <div className="desc">
-        {proj.acf.content &&
-          proj.acf.content.map((d) => (
-            <button
-              className="desc-lang"
-              key={d.lang}
-              onClick={() => selectLang(d.lang)}
-            >
-              {d.lang}
-            </button>
-          ))}
-        <div className="desc-text">
-          {ReactHtmlParser(
-            proj.acf.content.filter((ob) => ob.lang === bestLangAvailable())[0]
-              .text
-          )}
-        </div>
-      </div>
-    </>
-  );
+  return <></>;
 }
