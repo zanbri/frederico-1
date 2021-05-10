@@ -2,7 +2,6 @@ import { useAppState } from "./AppContext";
 
 function Button({ name, onClickHandler, type }) {
   const appState = useAppState();
-  console.log(appState.sort_by);
 
   return (
     <button
