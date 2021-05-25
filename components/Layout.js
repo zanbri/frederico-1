@@ -76,8 +76,7 @@ export default function Layout({ children }) {
         {/* Popovers */}
         {projs &&
           Array.from(appState.proj_ids).map((id) => {
-            const proj = projs.find((x) => x.id === id);
-            return <Popover proj={proj} key={proj.id} />;
+            return <Popover projs={projs} proj_id={id} key={id} />;
           })}
       </div>
 

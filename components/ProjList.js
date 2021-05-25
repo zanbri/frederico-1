@@ -38,8 +38,8 @@ export default function ProjList({ projs, sorter }) {
                   {proj.images.map((ii) => (
                     <span key={ii.image} className="proj-box">
                       <Image
-                        // src="/favicon.ico"
-                        src={ii.image}
+                        src="/favicon.ico"
+                        // src={ii.image}
                         width={40}
                         height={48}
                         key={ii.image}

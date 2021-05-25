@@ -1,13 +1,18 @@
 import { useState, Fragment } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import ReactHtmlParser from "react-html-parser";
 
-import { useDispatchAppState } from "./AppContext";
+import { useAppState, useDispatchAppState } from "./AppContext";
 
-export default function Popover({ proj }) {
+export default function Popover({ projs, proj_id }) {
+  console.log(proj_id);
+  const proj = projs.find((x) => x.id === proj_id);
   const [selectedLang, setSelectedLang] = useState("En");
   const dispatch = useDispatchAppState();
+  const router = useRouter();
+  const appState = useAppState();
 
   const bestLangAvailable = (proj) => {
     const eng = "En";
@@ -27,6 +32,23 @@ export default function Popover({ proj }) {
   };
 
   const handleProjClose = (proj_id) => {
+    // Change URL to next active popover, if any
+    if (appState.proj_ids.size > 1) {
+      const projs_iter = appState.proj_ids.values();
+      let active_id = projs_iter.next().value;
+      if (active_id === proj_id) {
+        console.log("skipping id ", proj_id);
+        active_id = projs_iter.next().value;
+      }
+      console.log("active id: ", active_id);
+      const active_proj_slug = projs.find((x) => x.id === active_id).slug;
+      console.log("next active slug: ", active_proj_slug);
+      router.push(`/project/${active_proj_slug}`);
+    } else {
+      router.push("/");
+    }
+
+    // Send dispatch
     dispatch({
       type: "CLOSE_PROJ",
       payload: proj_id,
