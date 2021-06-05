@@ -1,111 +1,222 @@
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import ReactHtmlParser from "react-html-parser";
+import { BiPlus, BiMinus, BiX } from "react-icons/bi";
 
+import ReactHtmlParser from "react-html-parser";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import Draggable from "react-draggable";
+
+import useEscPress from "../hooks/useEscPress";
 import { useAppState, useDispatchAppState } from "./AppContext";
 
-export default function Popover({ projs, proj_id }) {
-  console.log(proj_id);
-  const proj = projs.find((x) => x.id === proj_id);
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+export default function Popover({ proj_id }) {
   const [selectedLang, setSelectedLang] = useState("En");
   const dispatch = useDispatchAppState();
-  const router = useRouter();
   const appState = useAppState();
+  const router = useRouter();
+  const proj = appState.projs.find((x) => x.id === proj_id);
 
-  const bestLangAvailable = (proj) => {
-    const eng = "En";
-    if (proj.desc.some((ob) => ob.lang === selectedLang)) {
-      // Check if selected lang is available
-      return selectedLang;
-    } else if (proj.desc.some((ob) => ob.lang === eng)) {
-      // Check if english is available
-      return eng;
+  const bestLangAvailable = () => {
+    if (!proj.desc.some((ob) => ob.lang === selectedLang)) {
+      setSelectedLang(proj.desc[0].lang);
     }
-    // Otherwise, just use first language in data
-    return proj.desc[0].lang;
+    console.log("Best available will return: ", selectedLang);
+    return selectedLang;
   };
 
-  const selectLang = (lang) => {
-    setSelectedLang(lang);
-  };
+  const handleSetActive = () => {
+    // Send dispatch to update active project id
+    if (proj_id !== appState.active_id) {
+      dispatch({
+        type: "ACTIVE_ID",
+        payload: proj_id,
+      });
 
-  const handleProjClose = (proj_id) => {
-    // Change URL to next active popover, if any
-    if (appState.proj_ids.size > 1) {
-      const projs_iter = appState.proj_ids.values();
-      let active_id = projs_iter.next().value;
-      if (active_id === proj_id) {
-        console.log("skipping id ", proj_id);
-        active_id = projs_iter.next().value;
-      }
-      console.log("active id: ", active_id);
-      const active_proj_slug = projs.find((x) => x.id === active_id).slug;
-      console.log("next active slug: ", active_proj_slug);
+      const active_proj_slug = appState.projs.find(
+        (x) => x.id === proj_id
+      ).slug;
+      console.log("next active slug from set active: ", active_proj_slug);
       router.push(`/project/${active_proj_slug}`);
+    }
+  };
+
+  const handleSetMaximize = () => {
+    if (proj_id !== appState.maximized_id) {
+      dispatch({
+        type: "MAXIMIZE",
+        payload: proj_id,
+      });
     } else {
-      router.push("/");
+      dispatch({
+        type: "MAXIMIZE",
+        payload: null,
+      });
+    }
+  };
+
+  const handleProjClose = () => {
+    // Activate this project before closing it
+    if (proj_id !== appState.active_id) {
+      dispatch({
+        type: "ACTIVE_ID",
+        payload: proj_id,
+      });
     }
 
-    // Send dispatch
+    // Send dispatch to close project
     dispatch({
       type: "CLOSE_PROJ",
       payload: proj_id,
     });
+
+    // Reset maximized id
+    dispatch({
+      type: "MAXIMIZE",
+      payload: null,
+    });
+
+    // Change URL to next active popover, if any
+    if (appState.proj_ids.size > 0) {
+      const next_active_id = appState.proj_ids.values().next().value;
+      var assert = require("assert");
+      assert(
+        next_active_id !== proj_id,
+        "The next_active_id shouldn't be in the proj_ids set anymore."
+      );
+
+      const active_proj_slug = appState.projs.find(
+        (x) => x.id === next_active_id
+      ).slug;
+      console.log("next active slug: ", active_proj_slug);
+      router.push(`/project/${active_proj_slug}`);
+
+      // Send dispatch to update active project id
+      dispatch({
+        type: "ACTIVE_ID",
+        payload: next_active_id,
+      });
+    } else {
+      // Send dispatch to update active project id
+      dispatch({
+        type: "ACTIVE_ID",
+        payload: null,
+      });
+      router.push("/");
+    }
   };
 
+  useEscPress(() => {
+    console.log("Esc pressed! Active id: ", appState.active_id);
+    handleProjClose();
+  });
+
   return (
-    <div key={proj.id}>
-      {/* Header */}
-      <div className="header">
-        <button
-          className="close-popover"
-          onClick={() => handleProjClose(proj.id)}
-        >
-          X
-        </button>
-        <p className="title">{proj.title}</p>
-        <p className="year">{proj.year}</p>
-      </div>
-
-      {/* Images */}
-      <div className="images">
-        {proj.images.map((ii) => (
-          <Fragment key={ii.image}>
-            <Image
-              src="/favicon.ico"
-              // src={ii.image}
-              width={32}
-              height={32}
-              key={ii.image}
+    <Draggable
+      defaultPosition={{
+        x: getRandomInt(0, 400),
+        y: getRandomInt(-200, 200),
+      }}
+    >
+      <div
+        className={`popover ${appState.active_id === proj_id ? "active" : ""}
+        ${
+          appState.maximized_id === proj_id && appState.active_id === proj_id
+            ? "maximized"
+            : ""
+        }`}
+        onClick={() => handleSetActive()}
+      >
+        {/* Header */}
+        <div className="popover__btn_close-popover">
+          <BiX
+            onClick={() => {
+              // Prevent the closing button from working if this project is not active
+              appState.active_id === proj_id ? handleProjClose(proj.id) : {};
+            }}
+          />
+          {appState.maximized_id !== proj_id ? (
+            <BiPlus
+              onClick={() => {
+                // Prevent the closing button from working if this project is not active
+                appState.active_id === proj_id ? handleSetMaximize() : {};
+              }}
             />
-            Caption: {ii.caption}
-          </Fragment>
-        ))}
-      </div>
-
-      {/* Description */}
-      <div className="desc">
-        {proj.desc &&
-          proj.desc.map((d) => (
-            <button
-              className={`desc-lang ${
-                d.lang === bestLangAvailable(proj) && "active"
-              }`}
-              key={d.lang}
-              onClick={() => selectLang(d.lang)}
-            >
-              {d.lang}
-            </button>
-          ))}
-        <div className="desc-text">
-          {ReactHtmlParser(
-            proj.desc.filter((ob) => ob.lang === bestLangAvailable(proj))[0]
-              .text
+          ) : (
+            <BiMinus
+              onClick={() => {
+                // Prevent the closing button from working if this project is not active
+                appState.active_id === proj_id ? handleSetMaximize() : {};
+              }}
+            />
           )}
         </div>
+        <h3 className="popover__title">{proj.title}</h3>
+        <p className="popover__year">{proj.year}</p>
+
+        {/* Carousel */}
+        <Carousel
+          autoplay={false}
+          centerMode={true}
+          centerSlidePercentage={100}
+          infiniteLoop={true}
+          showStatus={false}
+          showIndicators={false}
+          // showArrows={false}
+          showThumbs={false}
+          useKeyboardArrows={true}
+          // width={"80%"}
+          // dynamicHeight={true}
+        >
+          {proj.images.map((ii, index) => (
+            <div key={ii}>
+              <Image
+                // src="/favicon.ico"
+                src={ii.image}
+                width={400}
+                height={400}
+                // layout="fill"
+                // layout="responsive"
+                // width="100%"
+                // height="100%"
+                // style={{ objectFit: "cover" }}
+                key={ii.image}
+              />
+              <p className="popover__slide_caption">__Caption__ {ii.caption}</p>
+            </div>
+          ))}
+        </Carousel>
+
+        {/* Description */}
+        {appState.maximized_id !== proj_id && (
+          <div className="popover__desc">
+            {proj.desc &&
+              proj.desc.map((d) => (
+                <button
+                  className={`desc-lang ${
+                    d.lang === selectedLang ? "active" : ""
+                  }`}
+                  key={d.lang}
+                  onClick={() => setSelectedLang(d.lang)}
+                >
+                  {d.lang.toUpperCase()}
+                </button>
+              ))}
+            <div className="popover__desc_text">
+              {ReactHtmlParser(
+                proj.desc.filter((ob) => ob.lang === bestLangAvailable())[0]
+                  .text
+              )}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </Draggable>
   );
 }

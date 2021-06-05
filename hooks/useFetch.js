@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-
+/**
+ * useFetch
+ * @param {string} url - the URL to fetch data from
+ */
 function useFetch(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);

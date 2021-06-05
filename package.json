@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "bootstrap": "^5.0.0-beta3",
     "json-server": "^0.16.3",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-draggable": "^4.4.3",
     "react-html-parser": "^2.0.2",
+    "react-icons": "^4.2.0",
+    "react-responsive-carousel": "^3.2.18",
     "sass": "^1.32.12"
   }
 }

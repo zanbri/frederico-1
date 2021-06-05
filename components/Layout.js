@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import useFetch from "../hooks/useFetch";
@@ -9,9 +10,9 @@ import ProjList from "./ProjList";
 import Popover from "./Popover";
 
 export default function Layout({ children }) {
-  const [projs, setProjs] = useState(null);
   const [sortToggle, setSortToggle] = useState(false);
 
+  const router = useRouter();
   const appState = useAppState();
   const dispatch = useDispatchAppState();
 
@@ -19,17 +20,23 @@ export default function Layout({ children }) {
   const sortData = (type) => {
     let sorted = [];
     if (type === "year") {
-      sorted = [...projs].sort((a, b) => a[type] - b[type]);
+      sorted = [...appState.projs].sort((a, b) => a[type] - b[type]);
     } else if (type === "random") {
-      sorted = [...projs].sort(() => 0.5 - Math.random()); // not best method for random shuffle, but good enough
+      sorted = [...appState.projs].sort(() => 0.5 - Math.random()); // not best method for random shuffle, but good enough
     } else {
-      sorted = [...projs].sort((a, b) => a[type].localeCompare(b[type]));
+      sorted = [...appState.projs].sort((a, b) =>
+        a[type].localeCompare(b[type])
+      );
     }
     if (sortToggle) {
       sorted.reverse();
     }
     setSortToggle(!sortToggle);
-    setProjs(sorted);
+
+    dispatch({
+      type: "LOAD_PROJS",
+      payload: sorted,
+    });
 
     dispatch({
       type: "SORT",
@@ -42,8 +49,41 @@ export default function Layout({ children }) {
   );
 
   useEffect(() => {
-    setProjs(rawProjects);
+    // setProjs(rawProjects);
+    dispatch({
+      type: "LOAD_PROJS",
+      payload: rawProjects,
+    });
   }, [rawProjects]);
+
+  // Set active_id from slug if initial URL has slug
+  useEffect(() => {
+    const { slug } = router.query;
+    console.log("Querying router for slug...");
+    if (slug && appState.projs.size > 0) {
+      const next_active_id = appState.projs.find((x) => x.slug === slug).id;
+
+      // Send dispatch to open project
+      dispatch({
+        type: "OPEN_PROJ",
+        payload: next_active_id,
+      });
+
+      console.log("active id set from slug: ", appState.active_id);
+    }
+  }, []);
+
+  const handleProjOpen = (proj_id) => {
+    // Send dispatch to open project
+    dispatch({
+      type: "OPEN_PROJ",
+      payload: proj_id,
+    });
+
+    const active_proj_slug = appState.projs.find((x) => x.id === proj_id).slug;
+    console.log("next active slug: ", active_proj_slug);
+    router.push(`/project/${active_proj_slug}`);
+  };
 
   return (
     <>
@@ -71,12 +111,20 @@ export default function Layout({ children }) {
         {error && <div className="error">{error}</div>}
 
         {/* Projects */}
-        {projs && <ProjList projs={projs} sorter={sortData} />}
+        {appState.projs && (
+          <ProjList sorter={sortData} handleProjOpen={handleProjOpen} />
+        )}
 
         {/* Popovers */}
-        {projs &&
+        {appState.projs &&
           Array.from(appState.proj_ids).map((id) => {
-            return <Popover projs={projs} proj_id={id} key={id} />;
+            return (
+              <Popover
+                proj_id={id}
+                // handleProjClose={handleProjClose}
+                key={id}
+              />
+            );
           })}
       </div>
 
