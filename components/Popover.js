@@ -61,60 +61,60 @@ export default function Popover({ proj_id }) {
     }
   };
 
-  const handleProjClose = () => {
+  const handleProjClose = (proj__id) => {
     // Activate this project before closing it
-    if (proj_id !== appState.active_id) {
+    if (proj__id !== appState.active_id) {
       dispatch({
         type: "ACTIVE_ID",
-        payload: proj_id,
-      });
-    }
-
-    // Send dispatch to close project
-    dispatch({
-      type: "CLOSE_PROJ",
-      payload: proj_id,
-    });
-
-    // Reset maximized id
-    dispatch({
-      type: "MAXIMIZE",
-      payload: null,
-    });
-
-    // Change URL to next active popover, if any
-    if (appState.proj_ids.size > 0) {
-      const next_active_id = appState.proj_ids.values().next().value;
-      var assert = require("assert");
-      assert(
-        next_active_id !== proj_id,
-        "The next_active_id shouldn't be in the proj_ids set anymore."
-      );
-
-      const active_proj_slug = appState.projs.find(
-        (x) => x.id === next_active_id
-      ).slug;
-      console.log("next active slug: ", active_proj_slug);
-      router.push(`/project/${active_proj_slug}`);
-
-      // Send dispatch to update active project id
-      dispatch({
-        type: "ACTIVE_ID",
-        payload: next_active_id,
+        payload: proj__id,
       });
     } else {
-      // Send dispatch to update active project id
+      // Send dispatch to close project
       dispatch({
-        type: "ACTIVE_ID",
+        type: "CLOSE_PROJ",
+        payload: proj__id,
+      });
+
+      // Reset maximized id
+      dispatch({
+        type: "MAXIMIZE",
         payload: null,
       });
-      router.push("/");
+
+      // Change URL to next active popover, if any
+      if (appState.proj_ids.size > 0) {
+        const next_active_id = appState.proj_ids.values().next().value;
+        var assert = require("assert");
+        assert(
+          next_active_id !== proj__id,
+          "The next_active_id shouldn't be in the proj_ids set anymore."
+        );
+
+        const active_proj_slug = appState.projs.find(
+          (x) => x.id === next_active_id
+        ).slug;
+        console.log("next active slug: ", active_proj_slug);
+        router.push(`/project/${active_proj_slug}`);
+
+        // Send dispatch to update active project id
+        dispatch({
+          type: "ACTIVE_ID",
+          payload: next_active_id,
+        });
+      } else {
+        // Send dispatch to update active project id
+        dispatch({
+          type: "ACTIVE_ID",
+          payload: null,
+        });
+        router.push("/");
+      }
     }
   };
 
   useEscPress(() => {
     console.log("Esc pressed! Active id: ", appState.active_id);
-    handleProjClose();
+    handleProjClose(appState.active_id);
   });
 
   return (
@@ -123,6 +123,9 @@ export default function Popover({ proj_id }) {
         x: getRandomInt(0, 400),
         y: getRandomInt(-200, 200),
       }}
+      position={appState.maximized_id === proj_id ? { x: 0, y: 0 } : null}
+      // cancel=".maximized"
+      // bounds="html"
     >
       <div
         className={`popover ${appState.active_id === proj_id ? "active" : ""}
@@ -134,8 +137,9 @@ export default function Popover({ proj_id }) {
         onClick={() => handleSetActive()}
       >
         {/* Header */}
-        <div className="popover__btn_close-popover">
+        <div className="popover__topright_icons">
           <BiX
+            className="icon-button"
             onClick={() => {
               // Prevent the closing button from working if this project is not active
               appState.active_id === proj_id ? handleProjClose(proj.id) : {};
@@ -143,6 +147,7 @@ export default function Popover({ proj_id }) {
           />
           {appState.maximized_id !== proj_id ? (
             <BiPlus
+              className="icon-button"
               onClick={() => {
                 // Prevent the closing button from working if this project is not active
                 appState.active_id === proj_id ? handleSetMaximize() : {};
@@ -150,6 +155,7 @@ export default function Popover({ proj_id }) {
             />
           ) : (
             <BiMinus
+              className="icon-button"
               onClick={() => {
                 // Prevent the closing button from working if this project is not active
                 appState.active_id === proj_id ? handleSetMaximize() : {};
@@ -168,27 +174,70 @@ export default function Popover({ proj_id }) {
           infiniteLoop={true}
           showStatus={false}
           showIndicators={false}
-          // showArrows={false}
           showThumbs={false}
           useKeyboardArrows={true}
-          // width={"80%"}
-          // dynamicHeight={true}
+          renderArrowPrev={(onClickHandler, hasPrev, label) => (
+            <div
+              className="carousel__arrow arrow_prev"
+              type="button"
+              onClick={onClickHandler}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  id="svg_arrow"
+                  d="M13.939 4.939L6.879 12 13.939 19.061 16.061 16.939 11.121 12 16.061 7.061z"
+                ></path>
+              </svg>
+            </div>
+          )}
+          renderArrowNext={(onClickHandler, hasNext, label) => (
+            <div
+              className="carousel__arrow arrow_next"
+              type="button"
+              onClick={onClickHandler}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  id="svg_arrow"
+                  d="M10.061 19.061L17.121 12 10.061 4.939 7.939 7.061 12.879 12 7.939 16.939z"
+                ></path>
+              </svg>
+            </div>
+          )}
         >
           {proj.images.map((ii, index) => (
-            <div key={ii}>
-              <Image
-                // src="/favicon.ico"
-                src={ii.image}
-                width={400}
-                height={400}
-                // layout="fill"
-                // layout="responsive"
-                // width="100%"
-                // height="100%"
-                // style={{ objectFit: "cover" }}
-                key={ii.image}
-              />
-              <p className="popover__slide_caption">__Caption__ {ii.caption}</p>
+            <div
+              key={ii}
+              className={`popover__image_contents ${
+                appState.maximized_id === proj_id ? "maximized" : ""
+              }`}
+            >
+              <div
+                className={`popover__image ${
+                  appState.maximized_id === proj_id ? "maximized" : ""
+                }`}
+              >
+                <Image
+                  key={ii.image}
+                  // src="/favicon.ico"
+                  src={ii.image}
+                  layout="fill"
+                  objectFit={"contain"}
+                />
+              </div>
+              <p className="popover__image_caption">
+                {`Lorem ipsum dolor . ${ii.caption}`}
+              </p>
             </div>
           ))}
         </Carousel>
@@ -199,7 +248,7 @@ export default function Popover({ proj_id }) {
             {proj.desc &&
               proj.desc.map((d) => (
                 <button
-                  className={`desc-lang ${
+                  className={`popover__desc_btn ${
                     d.lang === selectedLang ? "active" : ""
                   }`}
                   key={d.lang}

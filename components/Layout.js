@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -88,22 +87,16 @@ export default function Layout({ children }) {
   return (
     <>
       <div className="layout">
-        {/* Window Header */}
-        <Head>
-          <title>Frederico Ramos Lopes</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
         {/* Header */}
         <div className="header">
           <Link href="/">
             <h1 className="title">Frederico Ramos Lopes</h1>
           </Link>
           <div className="blurb">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-            labore consequuntur mollitia aspernatur pariatur, quidem ducimus
-            blanditiis velit quod quis, doloremque ipsa, enim impedit provident
-            nostrum ab ad adipisci natus.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
+            debitis fugit minima mollitia inventore, maxime earum quia omnis
+            corporis accusantium quis laudantium iure obcaecati velit illum
+            cupiditate nemo iusto laboriosam sapiente sed eligendi.
           </div>
         </div>
 

@@ -9,12 +9,12 @@ export default function ProjList({ sorter, handleProjOpen }) {
 
   return (
     <div className="proj-list">
-      <div className="sort-btn">
+      <div className="sort_btn">
         <Button name="by date" onClickHandler={sorter} type="year" />
         <Button name="by title" onClickHandler={sorter} type="title" />
         <Button name="random" onClickHandler={sorter} type="random" />
       </div>
-      <div className="filter-btn">
+      <div className="filter_btn">
         <Button name="all" onClickHandler={sorter} type="random" />
         <Button name="azul" onClickHandler={sorter} type="random" />
         <Button name="teatro" onClickHandler={sorter} type="random" />
@@ -27,9 +27,6 @@ export default function ProjList({ sorter, handleProjOpen }) {
               className={`proj ${appState.proj_ids.has(proj.id) && "active"}`}
               onClick={() => handleProjOpen(proj.id)}
             >
-              {/* <Link key={proj.id} href={`/project/${proj.slug}`}> */}
-              {/* <a> */}
-              {/* <div> */}
               <div className="proj-box">
                 <div className="proj-box-title">{proj.title}</div>
                 <div className="proj-box-year">{proj.year}</div>
@@ -45,9 +42,6 @@ export default function ProjList({ sorter, handleProjOpen }) {
                   />
                 </div>
               ))}
-              {/* </div> */}
-              {/* </a> */}
-              {/* </Link> */}
             </div>
           );
         })}
