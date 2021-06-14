@@ -94,6 +94,7 @@ export default function Layout({ children }) {
           <Link href="/">
             <h1 className="title">Frederico Ramos Lopes</h1>
           </Link>
+        
           <div className="blurb">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
             debitis fugit minima mollitia inventore, maxime earum quia omnis
@@ -101,6 +102,7 @@ export default function Layout({ children }) {
             cupiditate nemo iusto laboriosam sapiente sed eligendi.
           </div>
         </div>
+        
 
         {/* Errors */}
         {error && <div className="error">{error}</div>}

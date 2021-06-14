@@ -289,7 +289,7 @@ export default function Popover({ proj_id }) {
     <Draggable
       defaultPosition={{
         x: getRandomInt(0, 400),
-        y: getRandomInt(-200, 200),
+        y: getRandomInt(0, 200),
       }}
       position={appState.maximized_id === proj_id ? { x: 0, y: 0 } : null}
     >

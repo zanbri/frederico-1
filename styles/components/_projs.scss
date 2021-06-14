@@ -21,6 +21,16 @@
   cursor: pointer;
 }
 
+.proj-list-btns{
+  position: sticky;
+  top: 4rem;
+}
+
 .proj-box {
   display: inline-block;
+  img{
+    width: auto;
+    height: 6rem;
+    margin-right: .5rem;
+  }
 }

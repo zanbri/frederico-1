@@ -58,12 +58,13 @@ $scrollbar-width: 0.3rem;
   z-index: 2;
   color: $hl-green;
   font-size: 1.4rem;
+  cursor: pointer;
 }
 
 .popover__title {
   display: inline;
   margin-top: -1.3rem;
-  max-width: 91%;
+  max-width: 85%;
   font-size: 1.6rem;
   text-transform: uppercase;
 }
@@ -149,16 +150,14 @@ svg {
     padding-right: 1rem;
     width: 20rem;
     height: 40rem;
-
+    transition: all .3s;
     &.active {
       z-index: 1;
     }
 
     &.maximized {
       width: 90%;
-      height: 70%;
-      max-width: 55rem;
-      height: 35rem;
+      height: 80vh;
       margin: 0 auto;
       left: 5%;
       right: 5%;

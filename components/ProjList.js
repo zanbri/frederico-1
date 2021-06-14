@@ -9,6 +9,7 @@ export default function ProjList({ sorter, handleProjOpen }) {
 
   return (
     <div className="proj-list">
+      <div className="proj-list-btns">
       <div className="sort_btn">
         <Button name="by date" onClickHandler={sorter} type="year" />
         <Button name="by title" onClickHandler={sorter} type="title" />
@@ -18,6 +19,7 @@ export default function ProjList({ sorter, handleProjOpen }) {
         <Button name="all" onClickHandler={sorter} type="random" />
         <Button name="azul" onClickHandler={sorter} type="random" />
         <Button name="teatro" onClickHandler={sorter} type="random" />
+      </div>
       </div>
       <div className="projs">
         {appState.projs.map((proj) => {
@@ -33,13 +35,7 @@ export default function ProjList({ sorter, handleProjOpen }) {
               </div>
               {proj.images.map((ii) => (
                 <div key={ii.image} className="proj-box">
-                  <Image
-                    // src="/favicon.ico"
-                    src={ii.image}
-                    width={40}
-                    height={48}
-                    key={ii.image}
-                  />
+                  <img src={ii.image} />
                 </div>
               ))}
             </div>
