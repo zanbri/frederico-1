@@ -33,7 +33,8 @@ button.desc-lang.active {
 
 .popover {
   position: absolute;
-  display: inline-block;
+  display: flex;
+  flex-flow: column;
   background-color: white;
   border-style: solid;
   border-width: 0.4rem;
@@ -42,38 +43,59 @@ button.desc-lang.active {
   padding-bottom: 0.8rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  width: 20rem;
-}
-.popover.active {
-  z-index: 1;
-}
-.popover.maximized {
-  display: inline-block;
-  position: absolute;
-  width: 90%;
-  max-width: 55rem;
+  width: 94%;
+  height: 96%;
   margin: 0 auto;
-  left: 5%;
-  right: 5%;
-  top: 5%;
+  left: 3%;
+  right: 3%;
+  top: 2%;
+}
+
+.popover__image {
+  max-width: 70%;
+  margin: auto;
+  max-height: 10%;
+}
+.popover__image > div {
+  position: unset !important;
+  height: 100%;
+}
+.popover__image .image {
+  object-fit: contain;
+  position: relative !important;
+  width: auto !important;
+  height: unset !important;
+}
+
+.popover__desc {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin-top: 0.2rem;
 }
 
 .popover__topright_icons {
-  float: right;
+  margin-left: auto;
 }
 
 .icon-button {
+  z-index: 2;
   color: #42ff00;
   font-size: 1.4rem;
 }
 
 .popover__title {
+  display: inline;
+  margin-top: -1.3rem;
+  max-width: 91%;
   font-size: 1.6rem;
   text-transform: uppercase;
 }
 
 .popover__year {
   font-size: 1rem;
+  margin-bottom: 0.3rem;
 }
 
 svg {
@@ -100,29 +122,6 @@ svg {
   fill: #42ff00;
 }
 
-.popover__image {
-  display: block;
-  position: relative;
-  width: 14rem;
-  height: 17rem;
-  margin: auto;
-  margin-top: 0.8rem;
-}
-
-.popover__image.maximized {
-  display: block;
-  position: relative;
-  width: 25rem;
-  height: 25rem;
-  margin: auto;
-}
-
-.popover__image_caption {
-  font-size: 0.7rem;
-  margin-top: 0.5rem;
-  position: relative;
-}
-
 .popover__desc_btn {
   display: inline;
   border: none;
@@ -142,16 +141,6 @@ svg {
   cursor: pointer;
 }
 
-.popover__desc_text {
-  max-height: 11rem;
-  margin: 0;
-  margin-top: 0.5rem;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  overscroll-behavior: contain;
-  position: relative;
-}
-
 ::-webkit-scrollbar {
   width: 0.3rem;
 }
@@ -168,17 +157,59 @@ svg {
   box-shadow: inset 0 0 0.3rem rgba(0, 0, 0, 0);
 }
 
+@media only screen and (min-width: 768px) {
+  .popover {
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    background-color: white;
+    border-style: solid;
+    border-width: 0.4rem;
+    border-color: #42ff00;
+    padding-top: 0.5rem;
+    padding-bottom: 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 20rem;
+    height: 40rem;
+  }
+  .popover.active {
+    z-index: 1;
+  }
+  .popover.maximized {
+    width: 90%;
+    height: 70%;
+    max-width: 55rem;
+    height: 35rem;
+    margin: 0 auto;
+    left: 5%;
+    right: 5%;
+    top: 5%;
+  }
+
+  .popover__image.maximized {
+    margin: auto;
+    display: inline-block;
+    height: 25rem;
+  }
+  .popover__image.maximized > div {
+    position: unset !important;
+    height: 100%;
+  }
+  .popover__image.maximized .image {
+    object-fit: contain;
+    width: auto !important;
+    position: relative !important;
+    height: 100% !important;
+  }
+}
 .projs {
-  display: inline-flex;
-  flex-flow: row wrap;
-  gap: 0.2em;
+  display: inline;
   margin-top: 1rem;
 }
 
 .proj {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 0.2em;
+  display: inline;
 }
 .proj.active {
   background-color: #42ff00;
@@ -192,22 +223,44 @@ svg {
   display: inline-block;
 }
 
+:root {
+  font-size: 1.1vw;
+}
+
 body {
-  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica", "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Arial", sans-serif;
   padding: 1.2rem 1.2rem 1.2rem;
-  max-width: 70rem;
   margin: 0 auto;
 }
 
 h1 {
   font-size: 2.3rem;
   text-transform: uppercase;
+  font-weight: 400;
 }
 
 .blurb {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 0.8rem 0.8rem 0.8rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .blurb {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
 }
 
 /*# sourceMappingURL=output.css.map */

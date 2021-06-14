@@ -39,6 +39,9 @@ const reducer = (state, action) => {
     case "FILTER":
       console.log("Setting filter to: ", action.payload);
       return { ...state, filter_by: action.payload };
+    case "MOBILE":
+      console.log("Setting is_mobile to: ", action.payload);
+      return { ...state, is_mobile: action.payload };
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -52,6 +55,7 @@ export const AppContextProvider = ({ children }) => {
     filter_by: "all",
     active_id: null,
     maximized_id: null,
+    is_mobile: false,
   };
   const [state, dispatch] = useReducer(reducer, initState);
   return (

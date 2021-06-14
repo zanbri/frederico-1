@@ -84,6 +84,8 @@ export default function Layout({ children }) {
     router.push(`/project/${active_proj_slug}`);
   };
 
+  // Setup media query
+
   return (
     <>
       <div className="layout">
