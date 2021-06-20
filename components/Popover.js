@@ -78,39 +78,29 @@ export default function Popover({ proj_id }) {
         payload: proj__id,
       });
 
-      // Reset maximized id
-      dispatch({
-        type: "MAXIMIZE",
-        payload: null,
-      });
+      const next_active_id = [...appState.proj_ids].filter(
+        (x) => x !== proj_id
+      )[0];
 
-      // Change URL to next active popover, if any
-      if (appState.proj_ids.size > 0) {
-        const next_active_id = appState.proj_ids.values().next().value;
-        var assert = require("assert");
-        assert(
-          next_active_id !== proj__id,
-          "The next_active_id shouldn't be in the proj_ids set anymore."
-        );
-
+      if (!next_active_id) {
+        // If there is no other active id, return to home
+        dispatch({
+          type: "ACTIVE_ID",
+          payload: null,
+        });
+        router.push("/");
+      } else {
+        // If another active id is found, set it to active and change URL
         const active_proj_slug = appState.projs.find(
           (x) => x.id === next_active_id
         ).slug;
         console.log("next active slug: ", active_proj_slug);
         router.push(`/project/${active_proj_slug}`);
 
-        // Send dispatch to update active project id
         dispatch({
           type: "ACTIVE_ID",
           payload: next_active_id,
         });
-      } else {
-        // Send dispatch to update active project id
-        dispatch({
-          type: "ACTIVE_ID",
-          payload: null,
-        });
-        router.push("/");
       }
     }
   };

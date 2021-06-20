@@ -18,7 +18,7 @@ const reducer = (state, action) => {
       };
     case "CLOSE_PROJ":
       console.log("Closing proj: ", action.payload);
-      const new_state = { ...state };
+      const new_state = { ...state, maximized_id: null };
       new_state.proj_ids.delete(action.payload);
       return new_state;
     case "ACTIVE_ID":
@@ -29,7 +29,12 @@ const reducer = (state, action) => {
       return { ...state, maximized_id: action.payload };
     case "CLEAR_PROJS":
       console.log("Clearing projects: ");
-      return { ...state, proj_ids: new Set([]), active_id: null };
+      return {
+        ...state,
+        proj_ids: new Set([]),
+        active_id: null,
+        maximized_id: null,
+      };
     case "SORT":
       console.log("Setting sort to: ", action.payload);
       return { ...state, sort_by: action.payload };
