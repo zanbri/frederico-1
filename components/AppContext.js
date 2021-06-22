@@ -1,5 +1,4 @@
 import { useReducer, useContext, createContext } from "react";
-import { useRouter } from "next/router";
 
 const AppStateContext = createContext();
 const AppDispatchContext = createContext();

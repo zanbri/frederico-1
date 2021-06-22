@@ -52,10 +52,11 @@ $scrollbar-width: 0.3rem;
 
 .popover__topright_icons {
   margin-left: auto;
+  z-index: 300;
 }
 
 .icon-button {
-  z-index: 2;
+  z-index: 200;
   color: $hl-green;
   font-size: 1.4rem;
   cursor: pointer;
@@ -150,7 +151,10 @@ svg {
     padding-right: 1rem;
     width: 20rem;
     height: 40rem;
-    transition: all .3s;
+    // transition-property: height;
+    // transition-duration: 300ms;
+    transition: height 350ms ease-in-out;
+    transition: width 350ms ease-in-out;
     &.active {
       z-index: 1;
     }
@@ -165,22 +169,23 @@ svg {
     }
   }
 
-  .popover__image.maximized {
-    margin: auto;
-    display: inline-block;
-    height: 25rem;
+  .popover__image {
+    &.maximized {
+      margin: auto;
+      display: inline-block;
+      height: 25rem;
+      > div {
+        position: unset !important;
+        height: 100%;
+      }
 
-    > div {
-      position: unset !important;
-      height: 100%;
-    }
-
-    .image {
-      object-fit: contain;
-      // width: 100% !important;
-      width: auto !important;
-      position: relative !important;
-      height: 100% !important;
+      .image {
+        object-fit: contain;
+        // width: 100% !important;
+        width: auto !important;
+        position: relative !important;
+        height: 100% !important;
+      }
     }
   }
 }

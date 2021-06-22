@@ -273,7 +273,8 @@ export default function Popover({ proj_id }) {
     </div>
   );
 
-  return is_mobile || appState.maximized_id === proj_id ? (
+  // return is_mobile || appState.maximized_id === proj_id ? (
+  return is_mobile ? (
     <div>{content}</div>
   ) : (
     <Draggable
@@ -282,6 +283,7 @@ export default function Popover({ proj_id }) {
         y: getRandomInt(0, 200),
       }}
       position={appState.maximized_id === proj_id ? { x: 0, y: 0 } : null}
+      cancel=".maximized"
     >
       {content}
     </Draggable>
